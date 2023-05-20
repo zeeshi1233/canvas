@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+<body>
+  <div class="mx-4">
+    <br>
+    <input type="radio" id="pen-pencil" checked>
+    <i class="fa fa-pencil" style="font-size:24px"></i>
+    <input type="radio" id="pen-brush">
+    <i class="fa fa-paint-brush" style="font-size:24px"></i>
+    <!-- <input type="text"> -->
+  </div>
+  <div class="mx-4">
+    <br>
+    <label for="">Size</label>
+    <input type="range" min="1" max="50" id="pen-size">
+  </div>
+  <div class="mx-4">
+    <br>
+    <label for="">Color</label>
+    <input type="color" id="pen-color" value="#000" >
+  </div>
+  <div class="mx-4">
+    <br>
+    <button class="" id="save-canvas">Save</button>
+    <button class="" id="reset-canvas">Reset</button>
+  </div>
+  <div class="shadow-lg p-3 mb-5 bg-body rounded" id="canvas-wrapper">
+    <br><br><br><br><br>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    let canvas;
+
+    function setup() {
+      canvas = createCanvas(650, 600);
+      canvas.parent("canvas-wrapper");
+      background(255);
+    }
+
+    function mouseDragged() {
+      let type = document.querySelector("#pen-pencil").checked ? "pencil" : "brush";
+      let size = parseInt(document.querySelector("#pen-size").value);
+      let color = document.querySelector("#pen-color").value;
+
+      fill(color);
+      stroke(color);
+
+      if (type == "pencil") {
+        line(pmouseX, pmouseY, mouseX, mouseY);
+      } else {
+        ellipse(mouseX, mouseY, size, size);
+      }
+    }
+  </script>
+</body>
+</html>
